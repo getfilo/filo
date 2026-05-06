@@ -346,10 +346,11 @@ fetch(API)
   .then(data => {
     const container = document.getElementById("news-container");
 
+    container.innerHTML = "";
+
     data.reverse().forEach(item => {
       container.innerHTML += `
         <div class="news" style="margin-top:15px;padding:15px;border:1px solid #eee;border-radius:10px;">
-          <img src="${item.image}" style="width:100%;border-radius:10px;margin-bottom:10px;">
           <h3>${item.title}</h3>
           <p>${item.description}</p>
           <small>${item.date}</small>
