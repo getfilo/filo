@@ -29,7 +29,7 @@
 <button onclick="addNews()">Upload News</button>
 
 <script>
-const SHEET_API = "https://script.google.com/macros/s/AKfycbyd8c2067-NghYAtydXa-gtIplN1ahDtnVsaJmKaxLejjR017_neiMh932TNsEozHIP/exec";
+const SHEET_API = "https://script.google.com/macros/s/AKfycbzpwcwyurgC3OJDZiEbav1t887zRjxb5-j_6ucvgidrbahtoTyAuE7R3saFrTnS9sc8/exec";
 
 function addNews() {
   const data = {
@@ -40,13 +40,17 @@ function addNews() {
 
   fetch("YOUR_GOOGLE_SCRIPT_URL", {
     method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
+    body: JSON.stringify(data)
   })
-  .then(res => res.json())
-  .then(() => alert("News added!"));
+  .then(res => res.text())
+  .then(res => {
+    console.log(res);
+    alert("News updated successfully!");
+  })
+  .catch(err => {
+    console.error("Error:", err);
+    alert("Failed to update news");
+  });
 }
 </script>
 
