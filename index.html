@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FILO</title>
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+
+    body{
+      background:#fff;
+      color:#111;
+      line-height:1.6;
+      scroll-behavior:smooth;
+    }
+
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(12px);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 40px;
+      border-bottom:1px solid #eee;
+      z-index:100;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:20px;
+      font-weight:600;
+      letter-spacing:2px;
+    }
+
+    .logo img{
+      width:28px;
+      height:28px;
+      object-fit:contain;
+    }
+
+    .btn{
+      padding:10px 16px;
+      border:1px solid #111;
+      border-radius:999px;
+      text-decoration:none;
+      color:#111;
+      font-size:14px;
+      transition:0.3s;
+    }
+
+    .btn:hover{background:#111;color:#fff;}
+
+    .ig-btn{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid #111;
+      text-decoration:none;
+      color:#111;
+      font-size:14px;
+      transition:0.3s;
+    }
+
+    .ig-btn:hover{background:#111;color:#fff;}
+
+    .hero{
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:0 20px;
+    }
+
+    .hero h1{
+      font-size:56px;
+      font-weight:300;
+      letter-spacing:-1px;
+      max-width:900px;
+    }
+
+    .hero p{
+      margin-top:16px;
+      color:#555;
+      font-size:18px;
+      max-width:650px;
+    }
+
+    .cta{
+      margin-top:28px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .cta a{
+      padding:12px 20px;
+      border-radius:999px;
+      border:1px solid #111;
+      text-decoration:none;
+      font-size:14px;
+    }
+
+    .primary{background:#111;color:#fff;}
+    .secondary:hover{background:#f5f5f5;}
+
+    .section{
+      max-width:950px;
+      margin:auto;
+      padding:90px 20px;
+    }
+
+    .section h2{
+      font-size:30px;
+      margin-bottom:20px;
+    }
+
+    .section p{
+      font-size:15px;
+      color:#444;
+      line-height:1.8;
+    }
+
+    /* FLOW MAP */
+    .flow-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:18px;
+      margin-top:20px;
+    }
+
+    .flow-card{
+      border:1px solid #eee;
+      padding:18px;
+      border-radius:12px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      transition:0.3s;
+    }
+
+    .flow-card:hover{transform:translateY(-4px);}
+
+    .icon{
+      width:20px;
+      height:20px;
+      stroke:#111;
+      fill:none;
+      stroke-width:2;
+      flex-shrink:0;
+    }
+
+    /* TEAM */
+    .member{
+      margin-top:25px;
+      padding:20px;
+      border:1px solid #eee;
+      border-radius:12px;
+    }
+
+    .member h3{margin-bottom:10px;}
+
+    footer{
+      text-align:center;
+      padding:30px;
+      font-size:12px;
+      color:#888;
+      border-top:1px solid #eee;
+    }
+
+    @media(max-width:600px){
+      .hero h1{font-size:36px;}
+    }
+    
+    .section {
+  scroll-margin-top: 100px;
+}
+
+.hero {
+  padding-top: 80px;
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+   <img src="FILO.png" alt="FILO" onerror="this.style.display='none'" />
+    FILO
+  </div>
+
+  <div style="display:flex;gap:10px;align-items:center;">
+    <a class="ig-btn" href="https://instagram.com/getfilo.in" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <path d="M16 11.37a4 4 0 1 1-4.74-4.74 4 4 0 0 1 4.74 4.74z"/>
+        <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+      </svg>
+      Instagram
+    </a>
+
+    <a class="btn" href="https://forms.gle/9UWZSiMAQhyFGFDu6" target="_blank">Join</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1 data-aos="fade-up">Make your money simple to understand</h1>
+  <p data-aos="fade-up" data-aos-delay="100">
+    FILO helps creators, freelancers and digital earners track income, expenses and real profit in one clean system.
+  </p>
+
+  <div class="cta" data-aos="fade-up" data-aos-delay="200">
+    <a class="primary" href="https://forms.gle/9UWZSiMAQhyFGFDu6">Get Early Access</a>
+  </div>
+</section>
+
+<section class="section">
+  <h2 data-aos="fade-up">How FILO Works</h2>
+
+  <div class="flow-grid">
+
+    <div class="flow-card" data-aos="fade-up">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M3 7h18v14H3z"/><path d="M3 7l9-4 9 4"/></svg>
+      <div>Collect income from multiple sources in one place</div>
+    </div>
+
+    <div class="flow-card" data-aos="fade-up" data-aos-delay="100">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/></svg>
+      <div>Track expenses clearly without confusion</div>
+    </div>
+
+    <div class="flow-card" data-aos="fade-up" data-aos-delay="200">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M4 14l4-4 4 4 8-8"/></svg>
+      <div>Understand real profit instantly</div>
+    </div>
+
+    <div class="flow-card" data-aos="fade-up" data-aos-delay="300">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg>
+      <div>Track pending payments easily</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <h2 data-aos="fade-up">About Us</h2>
+  <p data-aos="fade-up" data-aos-delay="100">
+    FILO is a financial clarity platform built for the modern digital economy where individuals no longer depend on a single source of income. Today, creators, freelancers, marketers, and small business owners operate across multiple platforms simultaneously, generating income from different channels such as brand collaborations, freelance projects, digital products, and online services. While this creates opportunities for growth, it also introduces complexity in understanding true financial health. FILO was created to solve this exact problem by bringing all financial activity into one unified, simple, and intelligent system.
+    <br><br>
+    Our mission is to eliminate the confusion caused by fragmented financial tracking tools and replace them with a clean, intuitive experience that anyone can use without technical or accounting knowledge. Traditional tools like spreadsheets or complex accounting software often overwhelm users with unnecessary details. FILO takes a different approach by focusing only on what truly matters: income, expenses, pending payments, and actual profit. This allows users to immediately understand their financial position without manual calculations or guesswork.
+    <br><br>
+    Beyond tracking numbers, FILO aims to improve financial awareness. It helps users clearly see where their money comes from, where it goes, and how efficiently it is being managed. This level of clarity enables better decision-making, improved budgeting habits, and stronger long-term financial control. FILO is designed to grow with its users, adapting to different income models and evolving financial needs.
+    <br><br>
+    At its core, FILO is not just a financial tool but a clarity system for the modern economy. It empowers individuals to focus more on building their work, content, and businesses while ensuring their financial understanding remains simple, structured, and always accessible.
+  </p>
+</section>
+
+<section class="section">
+  <h2 data-aos="fade-up">Meet the Team</h2>
+
+  <div class="member" data-aos="fade-up">
+    <h3>Naren Hullatti – Founder</h3>
+    <p>
+      Naren Hullatti is the founder of FILO and the primary force behind its vision of simplifying financial clarity for modern digital earners. From an early stage, he recognized a major gap in how individuals manage money across multiple income streams, especially in today’s creator-driven and freelance-heavy economy. Most existing tools are either too complex or too fragmented, forcing users to rely on spreadsheets, manual tracking, or disconnected apps. Naren envisioned a system that removes this friction entirely and replaces it with simplicity, speed, and clarity.
+      <br><br>
+      As a founder, his focus lies in product vision, user experience design, and long-term scalability. He strongly believes that financial tools should not feel like enterprise software but should instead feel intuitive enough for anyone to use instantly. His approach emphasizes clarity over complexity, ensuring that every feature in FILO directly contributes to helping users understand their financial position better.
+      <br><br>
+      Naren is actively involved in shaping product direction through user feedback, surveys, and real-world validation. He prioritizes solving real problems over building unnecessary features, ensuring FILO remains focused and impactful. His long-term goal is to make FILO a global standard for financial clarity in the digital economy, empowering millions of creators and independent earners worldwide.
+    </p>
+  </div>
+
+  <div class="member" data-aos="fade-up" data-aos-delay="100">
+    <h3>Neesa Divekar – Co-founder</h3>
+    <p>
+      Neesa Divekar is the co-founder of FILO and plays a crucial role in shaping the product’s design, usability, and communication strategy. She focuses on ensuring that FILO remains extremely simple and intuitive, even while handling complex financial data behind the scenes. Her perspective bridges the gap between technical functionality and human usability, making sure the product feels natural and easy to understand for every user segment.
+      <br><br>
+      She is deeply involved in user experience design, interface clarity, and product storytelling. Neesa ensures that every interaction within FILO is smooth, minimal, and free from unnecessary complexity. Her design thinking approach helps translate abstract financial processes into simple visual experiences that users can quickly understand and act upon.
+      <br><br>
+      In addition to product design, she also contributes to user research and validation. By engaging with creators, freelancers, and small business owners, she helps gather insights that directly shape the product roadmap. Her vision is to ensure FILO remains user-first at every stage of growth and continues to solve real-world financial clarity problems in the simplest possible way.
+    </p>
+  </div>
+
+  <div class="member" data-aos="fade-up" data-aos-delay="200">
+    <h3>Rishith M Naik</h3>
+    <p>
+      Rishith M Naik is an integral contributor to FILO, focusing on system design, structural logic, and the underlying organization of financial data within the platform. His role is centered around ensuring that complex financial inputs are processed and presented in a way that remains clear, consistent, and scalable. He helps design the internal framework that allows FILO to handle multiple income streams, expenses, and financial interactions seamlessly.
+      <br><br>
+      His strength lies in analytical thinking and system structuring, which helps in defining how data flows across the platform. This ensures that users always receive accurate, meaningful insights without being exposed to unnecessary complexity. He contributes to building a strong foundation that supports long-term scalability and feature expansion.
+      <br><br>
+      Rishith’s work ensures that FILO is not just visually simple but also structurally robust. By focusing on backend logic and system organization, he helps maintain performance, reliability, and clarity as the platform grows. His contribution is essential in transforming FILO into a scalable financial clarity system capable of supporting a global user base.
+    </p>
+  </div>
+</section>
+
+<footer>
+  © 2026 FILO. Built for financial clarity.
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+</script>
+
+</body>
+</html>
