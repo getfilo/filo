@@ -334,16 +334,30 @@
 </section>
   
 <section class="section latest-updates">
-  <h2 data-aos="fade-up">Latest Updates</h2>
-
-  <div class="news" data-aos="fade-up">
-    <h3>FILO MVP Demo Launch</h3>
-    <p>
-      Filo MVP Demo has been launched on May 6, 2026. The MVP is built with minimal features to validate the idea. You can access it from the landing page.
-    </p>
-  </div>
+  <h2>Latest Updates</h2>
+  <div id="news-container"></div>
 </section>
 
+<script>
+const API = "YOUR_GOOGLE_SCRIPT_URL";
+
+fetch(API)
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById("news-container");
+
+    data.reverse().forEach(item => {
+      container.innerHTML += `
+        <div class="news" style="margin-top:15px;padding:15px;border:1px solid #eee;border-radius:10px;">
+          <img src="${item.image}" style="width:100%;border-radius:10px;margin-bottom:10px;">
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <small>${item.date}</small>
+        </div>
+      `;
+    });
+  });
+</script>
 <footer>
   © 2026 FILO. Built for financial clarity.
 </footer>
