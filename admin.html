@@ -24,7 +24,6 @@
 
 <input id="title" placeholder="Title">
 <textarea id="desc" placeholder="Description"></textarea>
-<input id="image" placeholder="Image URL">
 <input id="date" placeholder="Date">
 
 <button onclick="addNews()">Upload News</button>
@@ -36,16 +35,18 @@ function addNews() {
   const data = {
     title: document.getElementById("title").value,
     description: document.getElementById("desc").value,
-    image: document.getElementById("image").value,
     date: document.getElementById("date").value
   };
 
-  fetch(SHEET_API, {
+  fetch("YOUR_GOOGLE_SCRIPT_URL", {
     method: "POST",
-    body: JSON.stringify(data)
-  });
-
-  alert("News added!");
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => res.json())
+  .then(() => alert("News added!"));
 }
 </script>
 
