@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FILO Admin Access</title>
+  <title>FILO Admin</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
   <style>
 
@@ -15,13 +19,14 @@
     }
 
     body{
+      background:#ffffff;
+      color:#111;
       height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      background:#ffffff;
       overflow:hidden;
-      color:#111;
+      padding:20px;
     }
 
     /* Background Glow */
@@ -30,8 +35,15 @@
       position:absolute;
       width:500px;
       height:500px;
-      background:radial-gradient(circle, rgba(0,0,0,0.05), transparent 70%);
+
+      background:radial-gradient(
+        circle,
+        rgba(0,0,0,0.05),
+        transparent 70%
+      );
+
       filter:blur(40px);
+
       animation:float 8s ease-in-out infinite;
     }
 
@@ -54,26 +66,33 @@
     /* Card */
 
     .card{
-      position:relative;
-      z-index:2;
 
-      width:400px;
-      padding:42px;
+  position:relative;
+  z-index:2;
 
-      border-radius:28px;
+  width:430px;
 
-      background:rgba(255,255,255,0.92);
+  max-height:92vh;
 
-      backdrop-filter:blur(12px);
+  overflow-y:auto;
 
-      border:1px solid rgba(0,0,0,0.06);
+  padding:40px;
 
-      box-shadow:
-      0 10px 40px rgba(0,0,0,0.06),
-      0 2px 10px rgba(0,0,0,0.03);
+  border-radius:28px;
 
-      animation:fadeUp 1s ease;
-    }
+  background:rgba(255,255,255,0.92);
+
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(0,0,0,0.06);
+
+  box-shadow:
+  0 10px 40px rgba(0,0,0,0.06),
+  0 2px 10px rgba(0,0,0,0.03);
+
+  animation:fadeUp 1s ease;
+
+}
 
     @keyframes fadeUp{
 
@@ -103,8 +122,6 @@
       font-size:14px;
     }
 
-    /* Inputs */
-
     .input-box{
       position:relative;
       margin-bottom:16px;
@@ -124,13 +141,11 @@
     input:focus{
       border-color:#111;
       background:white;
-      transform:scale(1.02);
+      transform:scale(1.01);
 
       box-shadow:
       0 5px 15px rgba(0,0,0,0.05);
     }
-
-    /* Show Password */
 
     .toggle-password{
       position:absolute;
@@ -141,11 +156,6 @@
       color:#666;
       font-size:14px;
       user-select:none;
-      transition:0.2s;
-    }
-
-    .toggle-password:hover{
-      color:#111;
     }
 
     /* Buttons */
@@ -169,10 +179,6 @@
 
       box-shadow:
       0 15px 30px rgba(0,0,0,0.15);
-    }
-
-    .btn:active{
-      transform:scale(0.98);
     }
 
     .btn::before{
@@ -199,8 +205,6 @@
       left:120%;
     }
 
-    /* Error */
-
     .error{
       margin-top:15px;
       color:#d62839;
@@ -208,7 +212,7 @@
       font-size:14px;
     }
 
-    /* Loading Screen */
+    /* Loading */
 
     .loading-screen{
       display:none;
@@ -218,10 +222,14 @@
     .loader{
       width:60px;
       height:60px;
+
       border:5px solid #eeeeee;
       border-top:5px solid #111;
+
       border-radius:50%;
+
       margin:0 auto 25px;
+
       animation:spin 1s linear infinite;
     }
 
@@ -237,32 +245,77 @@
 
     }
 
-    .loading-screen h2{
-      font-size:28px;
-      margin-bottom:10px;
-    }
-
-    .loading-screen p{
-      color:#666;
-      font-size:14px;
-    }
-
     /* Portal */
 
     .portal{
       display:none;
-      text-align:center;
     }
 
     .portal h2{
-      font-size:30px;
+      font-size:28px;
       margin-bottom:10px;
     }
 
     .portal p{
       color:#666;
-      line-height:1.7;
-      margin-bottom:25px;
+      margin-bottom:20px;
+    }
+
+    /* Chat */
+
+    .chat-title{
+      font-size:14px;
+      color:#666;
+      margin-bottom:12px;
+    }
+
+    .chat-box{
+      height:300px;
+      overflow-y:auto;
+
+      background:#fafafa;
+
+      border:1px solid #e5e5e5;
+
+      border-radius:18px;
+
+      padding:15px;
+
+      margin-bottom:15px;
+    }
+
+    .message{
+      background:white;
+      padding:12px;
+      border-radius:14px;
+      margin-bottom:12px;
+      border:1px solid #f0f0f0;
+    }
+
+    .message-user{
+      font-size:13px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    .message-text{
+      color:#555;
+      line-height:1.5;
+    }
+
+    .chat-input-row{
+      display:flex;
+      gap:10px;
+      margin-bottom:18px;
+    }
+
+    .chat-input{
+      flex:1;
+      margin-bottom:0;
+    }
+
+    .send-btn{
+      width:110px;
     }
 
     .logout{
@@ -280,15 +333,36 @@
 
 <body>
 
-  <!-- Background Glow -->
+  <!-- Background -->
 
   <div class="bg-glow"></div>
 
-  <!-- LOGIN CARD -->
+  <!-- LOGIN -->
 
   <div class="card" id="loginBox">
 
-    <div class="logo">FILO</div>
+<div style="text-align:center; margin-bottom:18px;">
+
+  <img
+    src="FILO.png"
+    alt="FILO Logo"
+    style="
+      width:85px;
+      height:85px;
+      object-fit:cover;
+      border-radius:24px;
+      box-shadow:
+      0 10px 25px rgba(0,0,0,0.08);
+    "
+  >
+
+</div>   
+
+ <div class="logo" style="
+  text-align:center;
+">
+  FILO
+</div>
 
     <div class="subtitle">
       STEM Globe R&D<br>
@@ -333,13 +407,11 @@
       Access Portal
     </button>
 
-    <!-- Error -->
-
     <div class="error" id="error"></div>
 
   </div>
 
-  <!-- LOADING SCREEN -->
+  <!-- LOADING -->
 
   <div class="card loading-screen" id="loadingScreen">
 
@@ -347,13 +419,13 @@
 
     <h2>Admin Portal Initiating</h2>
 
-    <p>
+    <p style="color:#666;">
       Secure access verification in progress...
     </p>
 
   </div>
 
-  <!-- ADMIN PORTAL -->
+  <!-- PORTAL -->
 
   <div class="card portal" id="portalBox">
 
@@ -365,42 +437,101 @@
       FILO Admin Portal
     </p>
 
+
+    <!-- Chat -->
+
+    <div class="chat-title">
+      FILO Team Chat Room
+    </div>
+
+    <div class="chat-box" id="chatBox"></div>
+
+    <!-- Chat Input -->
+
+    <div class="chat-input-row">
+
+      <input
+        type="text"
+        id="chatInput"
+        class="chat-input"
+        placeholder="Type message..."
+      >
+
+      <button
+        class="btn send-btn"
+        onclick="sendMessage()"
+      >
+        Send
+      </button>
+
+    </div>
+
+    <!-- Logout -->
+
     <button class="btn logout" onclick="logout()">
       Logout
     </button>
 
-  </div>
-
   <script>
 
-    // Admin Accounts
+    // =========================
+    // FIREBASE CONFIG
+    // Replace With Your Config
+    // =========================
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyDrp7tPmWbTnVpBbwurZjFdo0tZFcHHpWU",
+  authDomain: "filo-admin-portal.firebaseapp.com",
+  projectId: "filo-admin-portal",
+  storageBucket: "filo-admin-portal.firebasestorage.app",
+  messagingSenderId: "276967896511",
+  appId: "1:276967896511:web:0c5caae09709c2a9d01d0a",
+  measurementId: "G-GC87SLTNY8"
+};
+    // Initialize Firebase
+
+    firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.firestore();
+
+    // =========================
+    // ADMINS
+    // =========================
 
     const admins = [
 
       {
         username: "naren.16@filo",
         password: "16#filo",
-        name: "Welcome Naren Hullatti",
+        name: "Naren Hullatti",
         role: "Founder, CEO - FILO"
       },
 
       {
         username: "neesa.17@filo",
         password: "17#filo",
-        name: "Welcome Neesa Divekar",
+        name: "Neesa Divekar",
         role: "Co-founder, COO - FILO"
       },
 
       {
         username: "rishith.18@filo",
         password: "18#filo",
-        name: "Welcome Rishith M Naik",
+        name: "Rishith M Naik",
         role: "Co-founder, CTO - FILO"
       }
 
     ];
 
-    // LOGIN FUNCTION
+    // =========================
+    // CURRENT USER
+    // =========================
+
+    let currentUser = "";
+
+    // =========================
+    // LOGIN
+    // =========================
 
     function login(){
 
@@ -415,11 +546,7 @@
 
       let accessGranted = false;
 
-      // Loop Through Admins
-
       for(let i = 0; i < admins.length; i++){
-
-        // IF Username & Password Match
 
         if(
           username === admins[i].username &&
@@ -428,41 +555,31 @@
 
           accessGranted = true;
 
-          // Hide Login Page
+          currentUser = admins[i].name;
 
           document.getElementById("loginBox").style.display = "none";
 
-          // Show Loading Screen
-
           document.getElementById("loadingScreen").style.display = "block";
-
-          // Simulated Loading Delay
 
           setTimeout(() => {
 
-            // Hide Loading
-
             document.getElementById("loadingScreen").style.display = "none";
 
-            // Show Portal
-
             document.getElementById("portalBox").style.display = "block";
-
-            // Dynamic Greeting
 
             document.getElementById("welcomeName").innerText =
               admins[i].name;
 
-            document.getElementById("welcomeRole").innerText =
-              admins[i].role;
+           document.getElementById("welcomeName").innerText =
+           "Welcome " + admins[i].name;
 
-          }, 2500);
+            loadMessages();
+
+          }, 2200);
 
         }
 
       }
-
-      // ELSE CONDITION
 
       if(accessGranted === false){
 
@@ -473,7 +590,176 @@
 
     }
 
-    // LOGOUT FUNCTION
+    // =========================
+    // SEND MESSAGE
+    // =========================
+
+    function sendMessage(){
+
+      const message =
+        document.getElementById("chatInput").value;
+
+      if(message.trim() === "") return;
+
+      db.collection("chatroom")
+      .add({
+
+        user: currentUser,
+
+        text: message,
+
+        time: new Date()
+
+      })
+
+      .then(() => {
+
+        document.getElementById("chatInput").value = "";
+
+      });
+
+    }
+
+   // =========================
+// DELETE MESSAGE
+// =========================
+
+function deleteMessage(messageId){
+
+  db.collection("chatroom")
+  .doc(messageId)
+  .delete();
+
+}
+
+// =========================
+// EDIT MESSAGE
+// =========================
+
+function editMessage(messageId, oldText){
+
+  const newText =
+    prompt("Edit your message:", oldText);
+
+  // IF Cancelled
+
+  if(newText === null) return;
+
+  // IF Empty
+
+  if(newText.trim() === "") return;
+
+  db.collection("chatroom")
+  .doc(messageId)
+  .update({
+
+    text: newText
+
+  });
+
+}
+
+    // =========================
+    // LOAD MESSAGES
+    // =========================
+
+   function loadMessages(){
+
+  db.collection("chatroom")
+  .orderBy("time")
+
+  .onSnapshot((snapshot) => {
+
+    const chatBox =
+      document.getElementById("chatBox");
+
+    chatBox.innerHTML = "";
+
+    snapshot.forEach((doc) => {
+
+      const data = doc.data();
+
+      // Show Edit/Delete only for own messages
+
+      let controls = "";
+
+      if(data.user === currentUser){
+
+        controls = `
+
+          <div style="
+            margin-top:10px;
+            display:flex;
+            gap:10px;
+          ">
+
+            <button
+              onclick="editMessage('${doc.id}', \`${data.text}\`)"
+              style="
+                border:none;
+                background:#f5f5f5;
+                padding:6px 12px;
+                border-radius:10px;
+                cursor:pointer;
+                font-size:12px;
+              "
+            >
+              Edit
+            </button>
+
+            <button
+              onclick="deleteMessage('${doc.id}')"
+              style="
+                border:none;
+                background:#ffecec;
+                color:#d62839;
+                padding:6px 12px;
+                border-radius:10px;
+                cursor:pointer;
+                font-size:12px;
+              "
+            >
+              Delete
+            </button>
+
+          </div>
+
+        `;
+
+      }
+
+      chatBox.innerHTML += `
+
+        <div class="message">
+
+          <div class="message-user">
+            ${data.user}
+          </div>
+
+          <div class="message-text">
+            ${data.text}
+          </div>
+
+          ${controls}
+
+        </div>
+
+      `;
+
+    });
+
+    // Auto Scroll Bottom
+
+    chatBox.scrollTop =
+      chatBox.scrollHeight;
+
+  });
+
+}
+
+    // =========================
+    // LOGOUT
+    // =========================
 
     function logout(){
 
@@ -489,7 +775,9 @@
 
     }
 
-    // TOGGLE PASSWORD
+    // =========================
+    // SHOW PASSWORD
+    // =========================
 
     function togglePassword(){
 
