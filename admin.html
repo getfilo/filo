@@ -1,58 +1,523 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>FILO Admin Naren Hullatti</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FILO Admin Access</title>
+
   <style>
-    body { font-family: Arial; padding: 40px; }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Inter",sans-serif;
     }
-    button {
-      padding: 10px 20px;
-      background: black;
-      color: white;
-      border: none;
-      cursor: pointer;
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#ffffff;
+      overflow:hidden;
+      color:#111;
     }
+
+    /* Background Glow */
+
+    .bg-glow{
+      position:absolute;
+      width:500px;
+      height:500px;
+      background:radial-gradient(circle, rgba(0,0,0,0.05), transparent 70%);
+      filter:blur(40px);
+      animation:float 8s ease-in-out infinite;
+    }
+
+    @keyframes float{
+
+      0%{
+        transform:translateY(0px);
+      }
+
+      50%{
+        transform:translateY(-25px);
+      }
+
+      100%{
+        transform:translateY(0px);
+      }
+
+    }
+
+    /* Card */
+
+    .card{
+      position:relative;
+      z-index:2;
+
+      width:400px;
+      padding:42px;
+
+      border-radius:28px;
+
+      background:rgba(255,255,255,0.92);
+
+      backdrop-filter:blur(12px);
+
+      border:1px solid rgba(0,0,0,0.06);
+
+      box-shadow:
+      0 10px 40px rgba(0,0,0,0.06),
+      0 2px 10px rgba(0,0,0,0.03);
+
+      animation:fadeUp 1s ease;
+    }
+
+    @keyframes fadeUp{
+
+      from{
+        opacity:0;
+        transform:translateY(25px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0px);
+      }
+
+    }
+
+    .logo{
+      font-size:42px;
+      font-weight:700;
+      letter-spacing:3px;
+      margin-bottom:10px;
+    }
+
+    .subtitle{
+      color:#666;
+      line-height:1.6;
+      margin-bottom:35px;
+      font-size:14px;
+    }
+
+    /* Inputs */
+
+    .input-box{
+      position:relative;
+      margin-bottom:16px;
+    }
+
+    input{
+      width:100%;
+      padding:15px;
+      border-radius:14px;
+      border:1px solid #e5e5e5;
+      background:#fafafa;
+      font-size:15px;
+      outline:none;
+      transition:0.3s;
+    }
+
+    input:focus{
+      border-color:#111;
+      background:white;
+      transform:scale(1.02);
+
+      box-shadow:
+      0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    /* Show Password */
+
+    .toggle-password{
+      position:absolute;
+      right:15px;
+      top:50%;
+      transform:translateY(-50%);
+      cursor:pointer;
+      color:#666;
+      font-size:14px;
+      user-select:none;
+      transition:0.2s;
+    }
+
+    .toggle-password:hover{
+      color:#111;
+    }
+
+    /* Buttons */
+
+    .btn{
+      position:relative;
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:16px;
+      background:#111;
+      color:white;
+      font-size:15px;
+      cursor:pointer;
+      overflow:hidden;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      transform:translateY(-3px) scale(1.02);
+
+      box-shadow:
+      0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .btn:active{
+      transform:scale(0.98);
+    }
+
+    .btn::before{
+      content:'';
+
+      position:absolute;
+      top:0;
+      left:-120%;
+
+      width:100%;
+      height:100%;
+
+      background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+      );
+
+      transition:0.7s;
+    }
+
+    .btn:hover::before{
+      left:120%;
+    }
+
+    /* Error */
+
+    .error{
+      margin-top:15px;
+      color:#d62839;
+      text-align:center;
+      font-size:14px;
+    }
+
+    /* Loading Screen */
+
+    .loading-screen{
+      display:none;
+      text-align:center;
+    }
+
+    .loader{
+      width:60px;
+      height:60px;
+      border:5px solid #eeeeee;
+      border-top:5px solid #111;
+      border-radius:50%;
+      margin:0 auto 25px;
+      animation:spin 1s linear infinite;
+    }
+
+    @keyframes spin{
+
+      0%{
+        transform:rotate(0deg);
+      }
+
+      100%{
+        transform:rotate(360deg);
+      }
+
+    }
+
+    .loading-screen h2{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+
+    .loading-screen p{
+      color:#666;
+      font-size:14px;
+    }
+
+    /* Portal */
+
+    .portal{
+      display:none;
+      text-align:center;
+    }
+
+    .portal h2{
+      font-size:30px;
+      margin-bottom:10px;
+    }
+
+    .portal p{
+      color:#666;
+      line-height:1.7;
+      margin-bottom:25px;
+    }
+
+    .logout{
+      background:#f3f3f3;
+      color:#111;
+    }
+
+    .logout:hover{
+      background:#111;
+      color:white;
+    }
+
   </style>
 </head>
+
 <body>
 
-<h2>FILO Admin Panel</h2>
+  <!-- Background Glow -->
 
-<input id="title" placeholder="Title">
-<textarea id="desc" placeholder="Description"></textarea>
-<input id="date" placeholder="Date">
+  <div class="bg-glow"></div>
 
-<button onclick="addNews()">Upload News</button>
+  <!-- LOGIN CARD -->
 
-<script>
-const SHEET_API = "https://script.google.com/macros/s/AKfycbzpwcwyurgC3OJDZiEbav1t887zRjxb5-j_6ucvgidrbahtoTyAuE7R3saFrTnS9sc8/exec";
+  <div class="card" id="loginBox">
 
-function addNews() {
-  const data = {
-    title: document.getElementById("title").value,
-    description: document.getElementById("desc").value,
-    date: document.getElementById("date").value
-  };
+    <div class="logo">FILO</div>
 
-  fetch("YOUR_GOOGLE_SCRIPT_URL", {
-    method: "POST",
-    body: JSON.stringify(data)
-  })
-  .then(res => res.text())
-  .then(res => {
-    console.log(res);
-    alert("News updated successfully!to Me");
-  })
-  .catch(err => {
-    console.error("Error:", err);
-    alert("Failed to update news! to me");
-  });
-}
-</script>
+    <div class="subtitle">
+      STEM Globe R&D<br>
+      Admin Access Only
+    </div>
+
+    <!-- Username -->
+
+    <div class="input-box">
+
+      <input
+        type="text"
+        id="username"
+        placeholder="Username"
+      >
+
+    </div>
+
+    <!-- Password -->
+
+    <div class="input-box">
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Passcode"
+      >
+
+      <span
+        class="toggle-password"
+        onclick="togglePassword()"
+        id="toggleBtn"
+      >
+        Show
+      </span>
+
+    </div>
+
+    <!-- Login Button -->
+
+    <button class="btn" onclick="login()">
+      Access Portal
+    </button>
+
+    <!-- Error -->
+
+    <div class="error" id="error"></div>
+
+  </div>
+
+  <!-- LOADING SCREEN -->
+
+  <div class="card loading-screen" id="loadingScreen">
+
+    <div class="loader"></div>
+
+    <h2>Admin Portal Initiating</h2>
+
+    <p>
+      Secure access verification in progress...
+    </p>
+
+  </div>
+
+  <!-- ADMIN PORTAL -->
+
+  <div class="card portal" id="portalBox">
+
+    <h2 id="welcomeName">
+      Welcome Admin
+    </h2>
+
+    <p id="welcomeRole">
+      FILO Admin Portal
+    </p>
+
+    <button class="btn logout" onclick="logout()">
+      Logout
+    </button>
+
+  </div>
+
+  <script>
+
+    // Admin Accounts
+
+    const admins = [
+
+      {
+        username: "naren.16@filo",
+        password: "16#filo",
+        name: "Welcome Naren Hullatti",
+        role: "Founder, CEO - FILO"
+      },
+
+      {
+        username: "neesa.17@filo",
+        password: "17#filo",
+        name: "Welcome Neesa Divekar",
+        role: "Co-founder, COO - FILO"
+      },
+
+      {
+        username: "rishith.18@filo",
+        password: "18#filo",
+        name: "Welcome Rishith M Naik",
+        role: "Co-founder, CTO - FILO"
+      }
+
+    ];
+
+    // LOGIN FUNCTION
+
+    function login(){
+
+      const username =
+        document.getElementById("username").value;
+
+      const password =
+        document.getElementById("password").value;
+
+      const error =
+        document.getElementById("error");
+
+      let accessGranted = false;
+
+      // Loop Through Admins
+
+      for(let i = 0; i < admins.length; i++){
+
+        // IF Username & Password Match
+
+        if(
+          username === admins[i].username &&
+          password === admins[i].password
+        ){
+
+          accessGranted = true;
+
+          // Hide Login Page
+
+          document.getElementById("loginBox").style.display = "none";
+
+          // Show Loading Screen
+
+          document.getElementById("loadingScreen").style.display = "block";
+
+          // Simulated Loading Delay
+
+          setTimeout(() => {
+
+            // Hide Loading
+
+            document.getElementById("loadingScreen").style.display = "none";
+
+            // Show Portal
+
+            document.getElementById("portalBox").style.display = "block";
+
+            // Dynamic Greeting
+
+            document.getElementById("welcomeName").innerText =
+              admins[i].name;
+
+            document.getElementById("welcomeRole").innerText =
+              admins[i].role;
+
+          }, 2500);
+
+        }
+
+      }
+
+      // ELSE CONDITION
+
+      if(accessGranted === false){
+
+        error.innerText =
+          "Invalid Username or Passcode";
+
+      }
+
+    }
+
+    // LOGOUT FUNCTION
+
+    function logout(){
+
+      document.getElementById("portalBox").style.display = "none";
+
+      document.getElementById("loginBox").style.display = "block";
+
+      document.getElementById("username").value = "";
+
+      document.getElementById("password").value = "";
+
+      document.getElementById("error").innerText = "";
+
+    }
+
+    // TOGGLE PASSWORD
+
+    function togglePassword(){
+
+      const passwordInput =
+        document.getElementById("password");
+
+      const toggleBtn =
+        document.getElementById("toggleBtn");
+
+      if(passwordInput.type === "password"){
+
+        passwordInput.type = "text";
+
+        toggleBtn.innerText = "Hide";
+
+      }
+
+      else{
+
+        passwordInput.type = "password";
+
+        toggleBtn.innerText = "Show";
+
+      }
+
+    }
+
+  </script>
 
 </body>
 </html>
