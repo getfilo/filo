@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Naren Hullatti | FILO Leadership</title>
+
+<!-- AOS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+
+body{
+  background:#fff;
+  color:#111;
+  line-height:1.7;
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(12px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 40px;
+  border-bottom:1px solid #eee;
+  z-index:100;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:600;
+  letter-spacing:2px;
+}
+
+.btn{
+  padding:10px 16px;
+  border:1px solid #111;
+  border-radius:999px;
+  text-decoration:none;
+  color:#111;
+  font-size:14px;
+  transition:0.25s ease;
+}
+
+.btn:hover{
+  background:#111;
+  color:#fff;
+  transform:translateY(-2px);
+}
+
+/* ================= HERO ================= */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 40px;
+  padding-top:80px;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:60px;
+  max-width:1100px;
+  width:100%;
+  align-items:center;
+}
+
+/* TEXT SIDE */
+.hero-text h1{
+  font-size:56px;
+  font-weight:300;
+}
+
+.hero-text p{
+  margin-top:16px;
+  color:#555;
+  font-size:18px;
+  max-width:500px;
+}
+
+.cta-row{
+  margin-top:30px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+/* ================= 3D FLIP IMAGE ================= */
+.hero-image{
+  display:flex;
+  justify-content:center;
+}
+
+.flip-card{
+  width:340px;
+  height:440px;
+  perspective:1200px;
+}
+
+.flip-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.8s ease;
+}
+
+.flip-card:hover .flip-inner{
+  transform:rotateY(180deg);
+}
+
+.flip-front,
+.flip-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  border-radius:18px;
+  overflow:hidden;
+}
+
+/* FRONT IMAGE */
+.flip-front img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* BACK SIDE */
+.flip-back{
+  background:#111;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  transform:rotateY(180deg);
+}
+
+.flip-back p{
+  font-size:18px;
+  max-width:85%;
+  line-height:1.5;
+}
+
+.flip-back span{
+  margin-top:12px;
+  font-size:14px;
+  opacity:0.7;
+}
+
+/* ================= SECTIONS ================= */
+.section{
+  max-width:900px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+.section h2{
+  font-size:28px;
+  margin-bottom:18px;
+}
+
+/* CORE */
+.core-card{
+  border:1px solid #eee;
+  border-radius:14px;
+  padding:25px;
+  transition:0.3s;
+}
+
+.core-card:hover{
+  transform:translateY(-4px);
+}
+
+/* BLOCKS */
+.block{
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:20px;
+  margin-top:20px;
+  transition:0.3s;
+}
+
+.block:hover{
+  transform:translateY(-6px);
+}
+
+.title{
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+/* CONTACT BAR */
+.contact-bar{
+  position:fixed;
+  right:20px;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  z-index:200;
+}
+
+.contact-bar a{
+  width:44px;
+  height:44px;
+  border:1px solid #111;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  transition:0.25s ease;
+}
+
+.contact-bar a:hover{
+  background:#111;
+  transform:translateX(-4px);
+}
+
+.contact-bar img{
+  width:20px;
+  height:20px;
+}
+
+.contact-bar a:hover img{
+  filter:invert(1);
+}
+
+/* ANIMATION */
+html{
+  scroll-behavior:smooth;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-grid{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .hero-text h1{
+    font-size:42px;
+  }
+
+  .flip-card{
+    width:260px;
+    height:340px;
+  }
+}
+
+<footer class="footer" data-aos="fade-up">
+
+  <div class="footer-inner">
+
+    <div class="footer-left">
+      <h3>FILO</h3>
+      <p>Finance Flow • Built for Naren Hullatti</p>
+    </div>
+
+    <div class="footer-right">
+      <a href="https://getfilo.github.io/filo">Home</a>
+      <a href="#identity">Identity</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="mailto:narenhullatti.ceo.stemglobe@gmail.com">Contact</a>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 FILO. All rights reserved.</p>
+  </div>
+
+</footer>
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <div class="logo">FILO</div>
+  <a href="index.html" class="btn">Back</a>
+</header>
+
+<!-- HERO -->
+<section class="hero" data-aos="fade-up">
+
+  <div class="hero-grid">
+
+    <!-- LEFT -->
+    <div class="hero-text">
+      <h1>Naren Hullatti</h1>
+      <p>CEO • Founder Ecosystem Builder • Research & Systems Architect</p>
+
+      <div class="cta-row">
+        <a href="#identity" class="btn">Identity</a>
+        <a href="#portfolio" class="btn">Portfolio</a>
+      </div>
+    </div>
+
+    <!-- RIGHT FLIP CARD -->
+    <div class="hero-image">
+
+      <div class="flip-card">
+        <div class="flip-inner">
+
+          <div class="flip-front">
+            <img src="naren.png" alt="Naren Hullatti">
+          </div>
+
+          <div class="flip-back">
+            <p>"Never leave what you dream"</p>
+            <span>- Naren</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- IDENTITY -->
+<section class="section" data-aos="fade-up">
+  <h2>Core Identity</h2>
+
+  <div class="core-card">
+    <p>
+    Naren Hullatti represents a new generation of builders who blend technology, research thinking, and global awareness into one unified vision. At the center of his identity is a strong belief that innovation is not just about creating products, but about designing systems that solve real-world problems at scale. He operates with a mindset that combines curiosity, speed of execution, and structured thinking—qualities often seen in global founders and research-driven technologists.
+      <br><br>
+     From an early stage, Naren developed a deep interest in how technology, economics, and scientific systems interact with each other. This curiosity evolved into a mission: to build interconnected platforms that improve how people think, learn, collaborate, and create value. His approach is not limited to one domain; instead, it spans across finance systems, education innovation, research collaboration, digital infrastructure, and creative web technologies.
+      <br><br>    
+    A defining trait of Naren’s identity is his systems-oriented thinking. He does not view ideas in isolation; instead, he builds ecosystems where each component supports the other. Whether it is financial intelligence tools or research collaboration platforms, his focus remains on scalability, usability, and long-term impact.
+
+He also values clarity in communication and simplicity in execution. Even when dealing with complex systems, his goal is to make them understandable and accessible. This reflects in the way he structures projects—clean, modular, and designed for expansion.
+<br><br>
+Beyond technical thinking, Naren carries a strong leadership mindset. He believes leadership is not about authority, but about responsibility, vision alignment, and consistent execution. His work reflects ambition balanced with structured planning, ensuring that ideas are not just imagined but actively built.
+<br><br>
+Overall, Naren Hullatti’s identity is defined by innovation, interdisciplinary thinking, and a commitment to building meaningful systems that connect technology with real-world impact. 
+
+</p>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="section" data-aos="fade-up">
+  <h2>Leadership Quality</h2>
+<p>
+Naren Hullatti’s leadership style is driven by vision, clarity, and execution discipline. He leads with a builder’s mindset—focusing less on hierarchy and more on problem-solving and outcomes. His strength lies in breaking down complex ideas into structured systems that teams can understand and execute efficiently.
+
+He emphasizes accountability and long-term thinking, ensuring that every initiative aligns with a broader ecosystem vision rather than isolated goals. His leadership approach encourages innovation while maintaining clear direction, making it easier to scale projects across domains.
+
+He also values adaptability, quickly iterating based on feedback and changing requirements. This makes his leadership style dynamic, especially in fast-moving tech environments. Overall, he leads through clarity of thought, structured execution, and a strong focus on meaningful impact.
+</p>
+ 
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section" data-aos="fade-up">
+  <h2>Founding Portfolio</h2>
+
+  <div class="block" data-aos="zoom-in"><div class="title">FILO</div>Finance Flow.</div>
+  <div class="block" data-aos="zoom-in"><div class="title">STEM Globe</div>Global innovation ecosystem.</div>
+  <div class="block" data-aos="zoom-in"><div class="title">ARIS</div>Analyzing & Reasoning intelligence system.</div>
+  <div class="block" data-aos="zoom-in"><div class="title">SGRCI</div>STEM Globe Research & collaboration Initative.</div>
+  <div class="block" data-aos="zoom-in"><div class="title">NEXORA</div>Open knowledge platform.</div>
+  <div class="block" data-aos="zoom-in"><div class="title">PixelWeb</div>Web development studio.</div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-bar">
+
+  <a href="mailto:narenhullatti.ceo.stemglobe@gmail.com">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/maildotru.svg">
+  </a>
+
+  <a href="https://instagram.com/naren.hullatti" target="_blank">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/instagram.svg">
+  </a>
+
+  <a href="https://x.com/Naren_Hullatti" target="_blank">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg">
+  </a>
+
+  <a href="https://www.linkedin.com/in/naren-hullatti-b68054387" target="_blank">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg">
+  </a>
+
+</div>
+
+<footer>
+  <hr> <!-- This creates the actual "line" -->
+  <p>&copy; 2024 Your Company Name</p>
+</footer>
+
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration:800,
+  once:true
+});
+</script>
+
+</body>
+</html>
