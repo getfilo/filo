@@ -221,6 +221,523 @@
 </head>
 <body>
 
+
+<!-- ===================================== -->
+<!-- PRELOADER -->
+<!-- PUT THIS RIGHT AFTER <body> -->
+<!-- ===================================== -->
+
+<div id="preloader">
+
+  <!-- BG GLOW -->
+ <!-- VIDEO BG -->
+
+<video class="loader-video"
+  autoplay
+  muted
+  loop
+  playsinline>
+
+  <source src="bg.mp4" type="video/mp4">
+
+</video>
+
+<!-- DARK OVERLAY -->
+
+<div class="video-overlay"></div>
+
+  <!-- PARTICLES -->
+  <div class="particles"></div>
+
+  <!-- CENTER -->
+  <div class="loader-content">
+
+    <!-- ROTATING RINGS -->
+    <div class="ring ring1"></div>
+    <div class="ring ring2"></div>
+    <div class="ring ring3"></div>
+
+    <!-- LOGO -->
+    <div class="loader-logo">
+
+      <img src="FILO.png" alt="FILO Logo">
+
+    </div>
+
+    <!-- TEXT -->
+
+    <h1 class="loader-title">
+      FILO
+    </h1>
+
+    <p class="loader-subtitle">
+      Finance • Intelligence • Logic • Optimization
+    </p>
+
+    <!-- LOADING BAR -->
+
+    <div class="loading-line">
+
+      <span></span>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- PRELOADER CSS -->
+<!-- PUT IN YOUR CSS FILE -->
+<!-- ===================================== -->
+
+<style>
+
+/* ===================================== */
+/* PRELOADER */
+/* ===================================== */
+
+#preloader{
+
+  position:fixed;
+
+  inset:0;
+
+  width:100%;
+  height:100vh;
+
+  background:#050505;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  z-index:999999;
+
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
+}
+
+/* HIDE */
+
+#preloader.hide{
+
+  opacity:0;
+  visibility:hidden;
+}
+
+/* ===================================== */
+/* BG GLOW */
+/* ===================================== */
+
+.loader-bg{
+
+  position:absolute;
+
+  width:900px;
+  height:900px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,0.06),
+      transparent 70%
+    );
+
+  animation:
+    pulseGlow 5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow{
+
+  0%{
+    transform:scale(1);
+    opacity:0.5;
+  }
+
+  50%{
+    transform:scale(1.15);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1);
+    opacity:0.5;
+  }
+
+}
+
+/* ===================================== */
+/* CONTENT */
+/* ===================================== */
+
+.loader-content{
+
+  position:relative;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+  justify-content:center;
+
+  z-index:5;
+}
+
+/* ===================================== */
+/* LOGO */
+/* ===================================== */
+
+.loader-logo{
+
+  width:150px;
+  height:150px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  position:relative;
+
+  z-index:5;
+
+  animation:
+    floatLogo 4s ease-in-out infinite;
+}
+
+.loader-logo img{
+
+  width:110px;
+
+  object-fit:contain;
+
+  filter:
+    drop-shadow(0 0 35px rgba(255,255,255,0.25));
+}
+
+@keyframes floatLogo{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-12px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
+}
+
+/* ===================================== */
+/* RINGS */
+/* ===================================== */
+
+.ring{
+
+  position:absolute;
+
+  border-radius:50%;
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+}
+
+.ring1{
+
+  width:220px;
+  height:220px;
+
+  animation:
+    rotateRing 10s linear infinite;
+}
+
+.ring2{
+
+  width:320px;
+  height:320px;
+
+  animation:
+    rotateRingReverse 16s linear infinite;
+}
+
+.ring3{
+
+  width:420px;
+  height:420px;
+
+  animation:
+    rotateRing 24s linear infinite;
+}
+
+@keyframes rotateRing{
+
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform:rotate(360deg);
+  }
+
+}
+
+@keyframes rotateRingReverse{
+
+  from{
+    transform:rotate(360deg);
+  }
+
+  to{
+    transform:rotate(0deg);
+  }
+
+}
+
+/* ===================================== */
+/* TITLE */
+/* ===================================== */
+
+.loader-title{
+
+  margin-top:35px;
+
+  font-size:74px;
+
+  letter-spacing:-4px;
+
+  color:#fff;
+
+  font-weight:700;
+
+  animation:
+    fadeSlide 1.4s ease;
+}
+
+.loader-subtitle{
+
+  margin-top:8px;
+
+  color:
+    rgba(255,255,255,0.6);
+
+  letter-spacing:3px;
+
+  text-transform:uppercase;
+
+  font-size:11px;
+
+  animation:
+    fadeSlide 1.8s ease;
+}
+
+@keyframes fadeSlide{
+
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0px);
+  }
+
+}
+
+/* ===================================== */
+/* LOADING LINE */
+/* ===================================== */
+
+.loading-line{
+
+  width:240px;
+  height:2px;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  margin-top:35px;
+
+  overflow:hidden;
+
+  border-radius:999px;
+}
+
+.loading-line span{
+
+  display:block;
+
+  width:0%;
+
+  height:100%;
+
+  background:#fff;
+
+  animation:
+    loadBar 3.5s ease forwards;
+}
+
+@keyframes loadBar{
+
+  from{
+    width:0%;
+  }
+
+  to{
+    width:100%;
+  }
+
+}
+
+/* ===================================== */
+/* PARTICLES */
+/* ===================================== */
+
+.particles::before,
+.particles::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  opacity:0.2;
+
+  box-shadow:
+    200px 120px #fff,
+    -220px 180px #fff,
+    300px -120px #fff,
+    -320px -160px #fff,
+    120px -260px #fff,
+    -100px 260px #fff;
+
+  animation:
+    floatParticles 12s linear infinite;
+}
+
+@keyframes floatParticles{
+
+  from{
+    transform:translateY(0px);
+  }
+
+  to{
+    transform:translateY(-80px);
+  }
+
+}
+
+/* ===================================== */
+/* MOBILE */
+/* ===================================== */
+
+@media(max-width:768px){
+
+  .loader-title{
+    font-size:48px;
+  }
+
+  .loader-logo{
+
+    width:120px;
+    height:120px;
+  }
+
+  .loader-logo img{
+    width:85px;
+  }
+
+  .ring1{
+    width:180px;
+    height:180px;
+  }
+
+  .ring2{
+    width:250px;
+    height:250px;
+  }
+
+  .ring3{
+    width:320px;
+    height:320px;
+  }
+
+  .loading-line{
+    width:180px;
+  }
+
+}
+
+/* ===================================== */
+/* VIDEO BG */
+/* ===================================== */
+
+.loader-video{
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  z-index:1;
+
+  opacity:0.28;
+
+  filter:
+    grayscale(100%)
+    contrast(120%)
+    brightness(0.55);
+}
+
+/* ===================================== */
+/* OVERLAY */
+/* ===================================== */
+
+.video-overlay{
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.85)
+    );
+
+  z-index:2;
+}
+
+</style>
+
+
+  
+
 <header>
   <div class="logo">
    <img src="FILO.png" alt="FILO" onerror="this.style.display='none'" />
@@ -369,6 +886,27 @@ fetch(API)
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({ duration: 800, once: true });
+</script>
+
+  <!-- PRELOADER JS -->
+<!-- PUT BEFORE </body> -->
+<!-- ===================================== -->
+
+<script>
+
+window.addEventListener("load",()=>{
+
+  const preloader =
+    document.getElementById("preloader");
+
+  setTimeout(()=>{
+
+    preloader.classList.add("hide");
+
+  },3500);
+
+});
+
 </script>
 
 </body>
