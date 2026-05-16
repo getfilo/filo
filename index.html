@@ -887,6 +887,29 @@ fetch(API)
   © 2026 FILO. Built for financial clarity.
 </footer>
 
+  <div id="vector-panel">
+  <h3>🧠 VECTOR</h3>
+  <p id="vector-status">Loading...</p>
+  <p id="vector-strongest"></p>
+  <p id="vector-weakest"></p>
+</div>
+
+<style>
+#vector-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 220px;
+  padding: 12px;
+  background: rgba(0,0,0,0.85);
+  color: #00ff88;
+  font-family: monospace;
+  border: 1px solid #00ff88;
+  border-radius: 10px;
+  z-index: 9999;
+}
+</style>
+
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init({ duration: 800, once: true });
@@ -911,6 +934,85 @@ window.addEventListener("load",()=>{
 
 });
 
+</script>
+
+  <script>
+const VECTOR_API = "https://vector-api-aibs.onrender.com";
+
+// ============================
+// SEND EVENT TO VECTOR
+// ============================
+async function sendToVector(source, message, priority = 1) {
+  try {
+    await fetch(`${VECTOR_API}/event`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        source,
+        message,
+        priority
+      })
+    });
+  } catch (err) {
+    console.log("VECTOR error:", err);
+  }
+}
+
+// ============================
+// GET VECTOR DECISIONS
+// ============================
+async function getVectorDecision() {
+  try {
+    const res = await fetch(`${VECTOR_API}/decide`);
+    const data = await res.json();
+    applyVectorUI(data);
+  } catch (err) {
+    console.log("VECTOR fetch error:", err);
+  }
+}
+
+// ============================
+// APPLY VECTOR TO UI
+// ============================
+function applyVectorUI(data) {
+  if (!data || !data.actions) return;
+
+  data.actions.forEach(action => {
+
+    if (action.type === "BOOST") {
+      document.body.style.outline = "3px solid #00ff88";
+      console.log("VECTOR BOOST:", action.target);
+    }
+
+    if (action.type === "MAINTAIN") {
+      document.body.style.filter = "brightness(1.05)";
+      console.log("VECTOR MAINTAIN:", action.target);
+    }
+
+  });
+}
+
+// ============================
+// AUTO LOOP (REAL-TIME FEEL)
+// ============================
+setInterval(getVectorDecision, 5000);
+</script>
+
+  <script>
+// page load event
+sendToVector("FILO", "page_loaded", 2);
+
+// button click tracking
+document.addEventListener("click", () => {
+  sendToVector("FILO", "user_click", 1);
+});
+
+// login event example
+function onLogin() {
+  sendToVector("FILO", "user_login", 3);
+}
 </script>
 
 </body>
